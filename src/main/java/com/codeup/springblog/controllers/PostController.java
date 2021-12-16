@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class PostController {
-    @RequestMapping(path = "/posts", method = RequestMethod.GET)
+    @RequestMapping(path = "/posts", method = RequestMethod.GET)   //or use @GetMapping("/posts")
     @ResponseBody
     public String postsIndex(){
         return "this will be the posts index page";
@@ -16,17 +16,17 @@ public class PostController {
 
     @RequestMapping(path= "/posts/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String postId(@PathVariable int id){
-        return "this will be where you view an individual post by id";
+    public String individualPost(@PathVariable int id){
+        return "this will be where you view an individual post by id" + id;
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
     @ResponseBody
-    public String createPost(){
+    public String viewCreatePost(){
         return "This will be where you view the form for creating a post";
     }
 
-    @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
+    @RequestMapping(path = "/posts/create", method = RequestMethod.POST) //or use @Postmapping
     @ResponseBody
     public String createPostForm(){
         return "this will be the Post method to create a new post";
