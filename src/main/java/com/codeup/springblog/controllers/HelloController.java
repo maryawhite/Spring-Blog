@@ -44,22 +44,4 @@ public class HelloController {
         model.addAttribute("cohort", "Welcome to " + cohort + "!");  //after you submit the form, it will display this string
         return "join";
     }
-
-
-    @GetMapping("/roll-dice")
-    public String showDiceForm() {
-        return "roll-dice";  //it looks like the return returns the html of that name
-    }
-
-    @PostMapping("/roll-dice")
-    public String userGuess(@RequestParam(name = "userGuess") String userGuess, Model model) {
-        Random random = new Random();
-        int int_random = random.nextInt(6) + 1;
-        model.addAttribute("userGuess", "You Guessed " + userGuess);
-        model.addAttribute("int_random", "The random number is " + int_random);  //this isn't showing up on the page...
-        return "roll-dice";
-
-    }
-
-
 }
