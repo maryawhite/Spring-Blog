@@ -1,6 +1,11 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head" />
+
+<head th:replace="partials ::head(pageTitle='Welcome')"></head>
+
 <body>
-<nav th:replace="partials :: navbar" />
+<div th:insert="partials ::navbar"></div>
 <h1>Welcome To My Site!</h1>
 </body>
+
+</html>

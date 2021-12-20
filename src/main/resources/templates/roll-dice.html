@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>roll dice</title>
-</head>
+
+<head th:replace="partials ::head(pageTitle='Roll')"></head>
+
+
 <body>
+<nav th:insert="partials ::navbar"></nav>
 
 <p>Choose a number below:</p>
 <a href="/roll-dice/1">1</a>
