@@ -1,23 +1,37 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.Post;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @Controller
 public class PostController {
-    @RequestMapping(path = "/posts", method = RequestMethod.GET)   //or use @GetMapping("/posts")
-    @ResponseBody
-    public String postsIndex(){
-        return "this will be the posts index page";
+    @RequestMapping(path = "/posts/index", method = RequestMethod.GET)   //or use @GetMapping("/posts/index")
+    public String postsIndex(Model model){
+        ArrayList<Post> posts = new ArrayList<>();
+        Post post1 = new Post("title1", "body1");
+        Post post2 = new Post("title2", "body2");
+        posts.add(post1);
+        posts.add(post2);
+        model.addAttribute("posts", posts); //posts is the name of the arrayList, now we can iterate through posts on the index.html
+        return "/posts/index";
     }
 
-    @RequestMapping(path= "/posts/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public String individualPost(@PathVariable int id){
-        return "this will be where you view an individual post by id" + id;
+//    @RequestMapping(path= "/posts/{id}", method = RequestMethod.GET)
+//    @ResponseBody
+//    public String individualPost(@PathVariable int id){
+//        return "this will be where you view an individual post by id" + id;
+//    }
+
+    @GetMapping("/posts/show")
+    public String showPost(Model model){
+        //views exercise
+        Post onePost1 = new Post("A Post", "The body of my post");
+        model.addAttribute("onepost", onePost1);
+        return "/posts/show";
     }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
@@ -29,7 +43,7 @@ public class PostController {
     @RequestMapping(path = "/posts/create", method = RequestMethod.POST) //or use @Postmapping
     @ResponseBody
     public String createPostForm(){
-        return "this will be the Post method to create a new post";
+        return "this will be the com.codeup.springblog.Post method to create a new post";
     }
 
 }
