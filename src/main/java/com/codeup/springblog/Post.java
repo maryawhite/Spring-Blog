@@ -1,8 +1,5 @@
 package com.codeup.springblog;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Post {
     private String title;
     private String body;
