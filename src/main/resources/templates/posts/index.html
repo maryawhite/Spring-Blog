@@ -8,6 +8,9 @@
 <div th:each="post : ${posts}">
     <h2 th:text="${post.title}"></h2>
     <p th:text="${post.body}"></p>
+    <form th:action="@{/posts/index}" method="post">
+        <button type="submit" name="postId" th:value="${post.id}">Delete Post</button>  <!--You must use th:value, not just value= -->
+    </form>
 </div>
 
 <!--<p th:text="${posts}"></p>-->
