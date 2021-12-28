@@ -18,7 +18,7 @@ public class PostController {
         this.postRepository = postRepository;
     }
 
-    @GetMapping("/posts/index")
+    @GetMapping("/index")
     public String postsIndex(Model model) {
         model.addAttribute("posts", postRepository.findAll());
         return "posts/index";
@@ -66,7 +66,7 @@ public class PostController {
     @PostMapping("/posts/create")
     public String addNewPost(@ModelAttribute Post post) {  //this is @ModelAttribute, NOT @RequestBody
         postRepository.save(post);
-        return "redirect:/posts/index";
+        return "redirect:/index";
     }
 
     //add edit functionality
