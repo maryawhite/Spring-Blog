@@ -4,13 +4,18 @@
 <head th:replace="partials ::head(pageTitle='Index')"></head>
 
 <body>
-<div th:each="post : ${posts}">
-    <h2 th:text="${post.title}"></h2>
-    <p th:text="${post.body}"></p>
-    <form th:action="@{/posts/index}" method="post">
-        <button type="submit" name="postId" th:value="${post.id}">Delete Post</button>
-        <!--You must use th:value, not just value= -->
-    </form>
+<div class="container">
+    <div th:each="post : ${posts}">
+        <h2 th:text="${post.title}"></h2>
+        <p th:text="${post.body}"></p>
+
+        <a th:href="@{/posts/{postId}(postId=${post.id})}">View post</a>
+
+        <form th:action="@{/posts/index}" method="post">
+            <button type="submit" name="postId" th:value="${post.id}">Delete Post</button>
+            <!--You must use th:value, not just value= -->
+        </form>
+    </div>
 </div>
 
 <!--<p th:text="${posts}"></p>-->

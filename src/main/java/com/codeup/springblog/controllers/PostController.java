@@ -41,14 +41,19 @@ public class PostController {
 //    public String individualPost(@PathVariable int id){
 //        return "this will be where you view an individual post by id" + id;
 //    }
+//    @GetMapping("/posts/{postId}")
+//    public String viewPost(Model model, @PathVariable Long postId) {
+//        model.addAttribute("posts", postRepository.findById(postId));
+//        return "/posts/show";
+//    }
 
-    @GetMapping("/posts/show")
-    public String showPost(Model model){
-        //views exercise
-        Post onePost1 = new Post("A Post", "The body of my post");
-        model.addAttribute("onepost", onePost1);
-        return "/posts/show";
-    }
+//    @GetMapping("/posts/show")
+//    public String showPost(Model model){
+//        //views exercise
+//        Post onePost1 = new Post("A Post", "The body of my post");
+//        model.addAttribute("onepost", onePost1);
+//        return "/posts/show";
+//    }
 
     @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
 //    @ResponseBody
@@ -69,9 +74,20 @@ public class PostController {
         return "redirect:/index";
     }
 
-    //add edit functionality
-    @PostMapping("/posts/{postId}/edit")
-    public void editPost(@PathVariable("postId") Long postId, String title, String body) {
+    //edit functionality
+    @GetMapping("/edit/{postId}")
+    public String viewPost(Model model, @PathVariable Long postId, String title, String body) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalStateException("post with id " + postId + " not found."));
+
+        model.addAttribute("posts", postRepository.findById(postId));
+        System.out.println(postRepository.findById(postId));
+        model.addAttribute("title", post.getTitle());
+        System.out.println(title);
+        return "/posts/edit";
+    }
+
+    @PostMapping("/edit/{postId}")
+    public String editPost(@PathVariable("postId") Long postId, String title, String body) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalStateException("post with id " + postId + " not found."));
 
         if(title != null && title.length() > 0 && !Objects.equals(post.getTitle(), title)) {
@@ -80,16 +96,14 @@ public class PostController {
         if(body != null && body.length() > 0 && !Objects.equals(post.getBody(), body)) {
             post.setBody(body);
         }
+        return "redirect:/index";
     }
 
-
     //add delete functionality--add a delete button in the show.html
-//    @DeleteMapping(path = "{postId}")
     @PostMapping("/posts/index")
     public void deletePost(Long postId) {
         postRepository.deleteById(postId);
     }
-
 
 
 }
