@@ -6,8 +6,8 @@
 </head>
 <body>
 <h1>Edit post</h1>
-<form th:action="@{/edit/{postId}(id=${postId})}" th:object="${posts}" method="POST">
-    <input type="hidden" th:field="*{id}" th:value="${postId}" name="postId"/>
+<form th:method="POST" th:object="${posts}" th:value="${postId}" th:action="@{'/edit/' + ${postId}}">
+    <input type="hidden" th:field="*{id}" name="postId"/>
     <label for="title">Title:</label><br>
     <input type="text" id="title" name="title" th:field="*{title}" th:value="title" />
     <br />

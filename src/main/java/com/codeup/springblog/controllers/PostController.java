@@ -46,7 +46,6 @@ public class PostController {
         model.addAttribute("post", showPost);
         return "/posts/show";
     }
-
 //    @GetMapping("/posts/show")
 //    public String showPost(Model model){
 //        //views exercise
@@ -77,25 +76,31 @@ public class PostController {
     //edit functionality
     @GetMapping("/edit/{postId}")
     public String viewPost(Model model, @PathVariable Long postId, String title) {
-        Post post = postRepository.getById(postId);  //or findById()?
-        model.addAttribute("posts", postRepository.getById(postId));
-        System.out.println(postRepository.getById(postId));
-        model.addAttribute("title", post.getTitle());
-        System.out.println(title);
+        Post post = postRepository.getById(postId);
+        model.addAttribute("posts", post); //this pre-populates the info in the form in the edit.html
+
         return "/posts/edit";
     }
 
+//    @PostMapping("/edit/{postId}")
+//    public String editPost(@PathVariable("postId") Long postId, String title, String body) {
+//        Post post = postRepository.getById(postId);
+//
+//        if(title != null && title.length() > 0 && !Objects.equals(post.getTitle(), title)) {
+//            post.setTitle(title);
+//        }
+//        if(body != null && body.length() > 0 && !Objects.equals(post.getBody(), body)) {
+//            post.setBody(body);
+//        }
+//        return "/posts/result";
+//    }
     @PostMapping("/edit/{postId}")
-    public String editPost(@PathVariable("postId") Long postId, String title, String body) {
-        Post post = postRepository.getById(postId);
+    public String editPost(@PathVariable("postId") Long postId, @ModelAttribute Post post) {
 
-        if(title != null && title.length() > 0 && !Objects.equals(post.getTitle(), title)) {
-            post.setTitle(title);
-        }
-        if(body != null && body.length() > 0 && !Objects.equals(post.getBody(), body)) {
-            post.setBody(body);
-        }
-        return "/posts/result";
+        postRepository.save(post);
+
+        return "redirect:/index";
+
     }
 
 
