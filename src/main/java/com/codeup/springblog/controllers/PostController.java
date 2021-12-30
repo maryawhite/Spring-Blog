@@ -5,9 +5,8 @@ import com.codeup.springblog.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
+
 import java.util.Objects;
-import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -41,11 +40,12 @@ public class PostController {
 //    public String individualPost(@PathVariable int id){
 //        return "this will be where you view an individual post by id" + id;
 //    }
-//    @GetMapping("/posts/{postId}")
-//    public String viewPost(Model model, @PathVariable Long postId) {
-//        model.addAttribute("posts", postRepository.findById(postId));
-//        return "/posts/show";
-//    }
+    @GetMapping("/posts/{postId}")
+    public String viewPost(Model model, @PathVariable Long postId) {
+        Post showPost = postRepository.getById(postId);
+        model.addAttribute("post", showPost);
+        return "/posts/show";
+    }
 
 //    @GetMapping("/posts/show")
 //    public String showPost(Model model){
@@ -76,11 +76,10 @@ public class PostController {
 
     //edit functionality
     @GetMapping("/edit/{postId}")
-    public String viewPost(Model model, @PathVariable Long postId, String title, String body) {
-        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalStateException("post with id " + postId + " not found."));
-
-        model.addAttribute("posts", postRepository.findById(postId));
-        System.out.println(postRepository.findById(postId));
+    public String viewPost(Model model, @PathVariable Long postId, String title) {
+        Post post = postRepository.getById(postId);  //or findById()?
+        model.addAttribute("posts", postRepository.getById(postId));
+        System.out.println(postRepository.getById(postId));
         model.addAttribute("title", post.getTitle());
         System.out.println(title);
         return "/posts/edit";
@@ -88,7 +87,7 @@ public class PostController {
 
     @PostMapping("/edit/{postId}")
     public String editPost(@PathVariable("postId") Long postId, String title, String body) {
-        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalStateException("post with id " + postId + " not found."));
+        Post post = postRepository.getById(postId);
 
         if(title != null && title.length() > 0 && !Objects.equals(post.getTitle(), title)) {
             post.setTitle(title);
@@ -96,8 +95,9 @@ public class PostController {
         if(body != null && body.length() > 0 && !Objects.equals(post.getBody(), body)) {
             post.setBody(body);
         }
-        return "redirect:/index";
+        return "/posts/result";
     }
+
 
     //add delete functionality--add a delete button in the show.html
     @PostMapping("/posts/index")

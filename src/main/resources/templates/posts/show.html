@@ -6,9 +6,9 @@
 <body>
 <!--<h2 th:text="${onepost.title}"></h2>-->
 <!--<p th:text="${onepost.body}"></p>-->
-
-<h2 th:value="${post.id}" th:text="${posts.title}"></h2>
-<p th:text="${posts.body}"></p>
-
+<div class="container">
+    <h2 th:value="${post.id}" th:text="${post.title}"></h2>
+    <p th:text="${post.body}"></p>
+</div>
 </body>
 </html>

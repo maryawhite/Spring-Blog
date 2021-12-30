@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>results</title>
+</head>
+<body>
+<h2>Here's what you submitted:</h2>
+<p>Title:<span>th:text="${post.title}"</span></p>
+<p>Title:<span>th:text="${post.body}"</span></p>
+
+<a href="@{/index}">Return to Index</a>
+</body>
+</html>

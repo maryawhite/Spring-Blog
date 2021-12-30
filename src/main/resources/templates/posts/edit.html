@@ -7,12 +7,12 @@
 <body>
 <h1>Edit post</h1>
 <form th:action="@{/edit/{postId}(id=${postId})}" th:object="${posts}" method="POST">
-
+    <input type="hidden" th:field="*{id}" th:value="${postId}" name="postId"/>
     <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title" th:value="title" />
+    <input type="text" id="title" name="title" th:field="*{title}" th:value="title" />
     <br />
     <label for="body">Body</label><br>
-    <textarea id="body" name="body"></textarea>
+    <textarea id="body" th:field="*{body}" name="body"></textarea>
     <br />
     <input type="submit" value="Submit Changes">
 
