@@ -9,6 +9,13 @@
 <div class="container">
     <h2 th:value="${post.id}" th:text="${post.title}"></h2>
     <p th:text="${post.body}"></p>
+
+    <!--the form method is GET, not POST, because I want to send them to the form to edit the post-->
+    <form method="GET" th:action="@{'/edit/' + ${postId}}">
+        <input type="hidden" name="postId" id="postId" th:field="*{post.id}" />
+        <button type="submit" name="submit" value="editPost">Edit</button>
+    </form>
+
 </div>
 </body>
 </html>

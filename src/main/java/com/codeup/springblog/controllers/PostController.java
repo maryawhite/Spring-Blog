@@ -100,7 +100,7 @@ public class PostController {
         postRepository.save(post);
 
         return "redirect:/index";
-
+//        return "/posts/result";
     }
 
 

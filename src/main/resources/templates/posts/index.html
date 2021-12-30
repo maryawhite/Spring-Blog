@@ -5,13 +5,17 @@
 
 <body>
 <div class="container">
-    <div th:each="post : ${posts}">
+    <div class="border border-info m-1 p-1" th:each="post : ${posts}">
         <h2 th:text="${post.title}"></h2>
         <p th:text="${post.body}"></p>
 
         <a th:href="@{/posts/{postId}(postId=${post.id})}">View post</a>
 
-        <form th:action="@{/posts/index}" method="post">
+        <form class="m-1" th:action="@{'/posts/' + ${post.id}}" method="GET">
+            <button type="submit" name="editPost" th:value="${post.id}">View Post</button>
+        </form>
+
+        <form class="m-1" th:action="@{/posts/index}" method="post">
             <button type="submit" name="postId" th:value="${post.id}">Delete Post</button>
             <!--You must use th:value, not just value= -->
         </form>

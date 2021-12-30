@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Post</title>
-</head>
+<head th:replace="partials ::head(pageTitle='Edit Post')"></head>
+
 <body>
 <h1>Edit post</h1>
 <form th:method="POST" th:object="${posts}" th:value="${postId}" th:action="@{'/edit/' + ${postId}}">

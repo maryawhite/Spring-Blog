@@ -6,9 +6,15 @@
 </head>
 <body>
 <h2>Here's what you submitted:</h2>
-<p>Title:<span>th:text="${post.title}"</span></p>
-<p>Title:<span>th:text="${post.body}"</span></p>
+<!--None of these work, redirecting to index for now-->
+<h3 th:value="${postId}" th:text="${title}">  <span>th:text="${post.title}"</span></h3>
+<p th:text="${title}"> </p>
+<p><span>th:text="${post.body}"</span></p>
 
-<a href="@{/index}">Return to Index</a>
+<h2 th:value="${post.id}" th:text="${post.title}"></h2>
+<p th:text="${post.body}"></p>
+
+
+<a th:href="@{/index}">Return to Index</a>
 </body>
 </html>
