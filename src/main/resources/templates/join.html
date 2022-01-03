@@ -4,14 +4,15 @@
 <head th:replace="partials ::head(pageTitle='Join')"></head>
 
 <body>
-<nav th:insert="partials ::navbar"></nav>
+<div class="container">
+    <nav th:insert="partials ::navbar"></nav>
 
-<h1 th:text="${cohort}"></h1>
+    <h1 th:text="${cohort}"></h1>
 
-<form action="/join" method="post">
-    <input type="text" name="cohort" id="cohort-ip" class="field" placeholder="type cohort name" />
-    <button>Join now</button>
-</form>
-
+    <form action="/join" method="post">
+        <input type="text" name="cohort" id="cohort-ip" class="field" placeholder="type cohort name"/>
+        <button>Join now</button>
+    </form>
+</div>
 </body>
 </html>
