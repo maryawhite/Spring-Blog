@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 //to use views, we will remove the responseBody annotation and create a home.html
 @Controller
 public class HomeController {
-    @GetMapping("/home") //the name needs to match the name of the html file in your resources/templates folder
+    @GetMapping("/home")
     public String welcome(){
-        return "home";
+        return "home";  //the name needs to match the name of the html file in your resources/templates folder
     }
 }

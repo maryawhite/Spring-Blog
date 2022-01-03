@@ -12,7 +12,7 @@ public class HelloController {
     @ResponseBody
 
     public String hello(){
-        return "Hello from Mary!";  //this is what displays when you visit /home
+        return "Hello from Mary!";  //this is what displays when you visit /hello
     }
 
 //    @GetMapping("/hello{name}") //name is a variable that we named name

@@ -3,6 +3,7 @@
 <head th:replace="partials ::head(pageTitle='Edit Post')"></head>
 
 <body>
+<div class="container">
 <h1>Edit post</h1>
 <form th:method="POST" th:object="${posts}" th:value="${postId}" th:action="@{'/edit/' + ${postId}}">
     <input type="hidden" th:field="*{id}" name="postId"/>
@@ -13,7 +14,7 @@
     <textarea id="body" th:field="*{body}" name="body"></textarea>
     <br />
     <input type="submit" value="Submit Changes">
-
 </form>
+</div>
 </body>
 </html>
