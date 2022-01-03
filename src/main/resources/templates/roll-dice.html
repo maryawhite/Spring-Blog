@@ -3,27 +3,30 @@
 
 <head th:replace="partials ::head(pageTitle='Roll')"></head>
 
-
 <body>
-<nav th:insert="partials ::navbar"></nav>
+<div class="container">
+    <nav th:insert="partials ::navbar"></nav>
 
-<p>Choose a number below:</p>
-<a href="/roll-dice/1">1</a>
-<a href="/roll-dice/2">2</a>
-<a href="/roll-dice/3">3</a>
-<a href="/roll-dice/4">4</a>
-<a href="/roll-dice/5">5</a>
-<a href="/roll-dice/6">6</a>
+    <p>Choose a number below:</p>
+    <a href="/roll-dice/1">1</a>
+    <a href="/roll-dice/2">2</a>
+    <a href="/roll-dice/3">3</a>
+    <a href="/roll-dice/4">4</a>
+    <a href="/roll-dice/5">5</a>
+    <a href="/roll-dice/6">6</a>
 
-<p><span th:text="${userGuess}">Guess</span></p>
-<p><span th:text="${int_random}">random number</span></p>
-<p><span th:text="${message}"></span></p>
-<hr>
-<p>bonus: "Roll" a series of dice on each page load, as opposed to an individual die. Show all the rolls to the user and display how many rolls matched their guess.</p>
-<p><span th:text="${roll2}"></span><span th:text="${roll3}"></span></p>
-<p><span th:text="${counter}"></span></p>
-<hr>
-<p>What's the difference between RequestParam and PathVariable? Both can be used to extract values from the request URI, but they are a bit different. RequestParam is also known as the query parameter it comes back in the url as /name?thing=something. We are using PathVariable here.</p>
-
+    <p><span th:text="${userGuess}">Guess</span></p>
+    <p><span th:text="${int_random}">random number</span></p>
+    <p><span th:text="${message}"></span></p>
+    <hr>
+    <p>bonus: "Roll" a series of dice on each page load, as opposed to an individual die. Show all the rolls to the user
+        and display how many rolls matched their guess.</p>
+    <p><span th:text="${roll2}"></span><span th:text="${roll3}"></span></p>
+    <p><span th:text="${counter}"></span></p>
+    <hr>
+    <p>What's the difference between RequestParam and PathVariable? Both can be used to extract values from the request
+        URI, but they are a bit different. RequestParam is also known as the query parameter it comes back in the url as
+        /name?thing=something. We are using PathVariable here.</p>
+</div>
 </body>
 </html>

@@ -41,7 +41,7 @@ public class PostController {
 //        return "this will be where you view an individual post by id" + id;
 //    }
     @GetMapping("/posts/{postId}")
-    public String viewPost(Model model, @PathVariable Long postId) {
+    public String showPost(Model model, @PathVariable Long postId) {
         Post showPost = postRepository.getById(postId);
         model.addAttribute("post", showPost);
         return "/posts/show";
@@ -54,8 +54,7 @@ public class PostController {
 //        return "/posts/show";
 //    }
 
-    @RequestMapping(path = "/posts/create", method = RequestMethod.GET)
-//    @ResponseBody
+    @GetMapping("/posts/create")
     public String viewCreatePost(){
 //        return "This is where you view the form for creating a post";
         return "/posts/create";
@@ -75,7 +74,7 @@ public class PostController {
 
     //edit functionality
     @GetMapping("/edit/{postId}")
-    public String viewPost(Model model, @PathVariable Long postId, String title) {
+    public String viewPost(Model model, @PathVariable Long postId) {
         Post post = postRepository.getById(postId);
         model.addAttribute("posts", post); //this pre-populates the info in the form in the edit.html
 
@@ -100,15 +99,12 @@ public class PostController {
         postRepository.save(post);
 
         return "redirect:/index";
-//        return "/posts/result";
     }
 
-
-    //add delete functionality--add a delete button in the show.html
+    //delete functionality--add a delete button in the show.html
     @PostMapping("/posts/index")
     public void deletePost(Long postId) {
         postRepository.deleteById(postId);
     }
-
 
 }

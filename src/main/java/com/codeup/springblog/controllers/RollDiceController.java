@@ -11,10 +11,10 @@ import java.util.Random;
 public class RollDiceController {
     @GetMapping("/roll-dice")
     public String showDiceForm() {
-        return "roll-dice";  //it looks like the return returns the html of that name
+        return "roll-dice";
     }
 
-    @GetMapping("/roll-dice/{userGuess}") //note this is GetMapping, Not com.codeup.springblog.Post...we want to get data, not add or update it, and the instructions say to use GET
+    @GetMapping("/roll-dice/{userGuess}") //note this is GetMapping
     public String userGuess(@PathVariable int userGuess, Model model) {  //a pathVariable is a variable that is part of the URI request, as opposed to being passed as a query string
         Random random = new Random();
         int int_random = random.nextInt(6) + 1;

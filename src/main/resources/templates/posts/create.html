@@ -4,14 +4,16 @@
 <head th:replace="partials ::head(pageTitle='Create a post')"></head>
 
 <body>
-<form th:action="@{/posts/create}" method="post">
-    <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title" />
-    <br />
-    <label for="body">Body</label><br>
-    <textarea id="body" name="body"></textarea>
-    <br />
-    <input type="submit" />
-</form>
+<div class="container">
+    <form th:action="@{/posts/create}" method="post">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title"/>
+        <br/>
+        <label for="body">Body</label><br>
+        <textarea id="body" name="body"></textarea>
+        <br/>
+        <input type="submit"/>
+    </form>
+</div>
 </body>
 </html>
