@@ -17,6 +17,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL) //CascadeType.ALL means to apply all cascading operations to the related entity. Cascading operations are applied when you delete or update the parent entity.
+    @JoinColumn(name = "post_id")  //this should create a foreign key named post_id in the user table?
+    private Post post;
+
     //default constructor
     public User(){}
 

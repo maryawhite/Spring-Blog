@@ -13,6 +13,13 @@ public class Post {
     @Column(nullable = false)
     private String body;
 
+    @OneToOne(mappedBy = "post")
+    private User user;
+
+    //The inverse-side of the relationship sets the @OneToOne's mappedBy parameter to indicate that the relationship is mapped by the other entity.
+    //mappedBy — Defines the entity that owns the relationship which is the post entity in our case? //Usually, the child entity is one that owns the relationship and the parent entity is the inverse side of the relationship.
+    //the one to one relationship can be unidirectional or bidirectional
+
     //default constructor
     public Post() {
     }
