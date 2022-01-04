@@ -81,18 +81,6 @@ public class PostController {
         return "/posts/edit";
     }
 
-//    @PostMapping("/edit/{postId}")
-//    public String editPost(@PathVariable("postId") Long postId, String title, String body) {
-//        Post post = postRepository.getById(postId);
-//
-//        if(title != null && title.length() > 0 && !Objects.equals(post.getTitle(), title)) {
-//            post.setTitle(title);
-//        }
-//        if(body != null && body.length() > 0 && !Objects.equals(post.getBody(), body)) {
-//            post.setBody(body);
-//        }
-//        return "/posts/result";
-//    }
     @PostMapping("/edit/{postId}")
     public String editPost(@PathVariable("postId") Long postId, @ModelAttribute Post post) {
 
