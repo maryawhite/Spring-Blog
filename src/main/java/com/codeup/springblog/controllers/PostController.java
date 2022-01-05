@@ -24,7 +24,6 @@ public class PostController {
 
     @GetMapping("/index")
     public String postsIndex(Model model) {
-        model.addAttribute("user", userRepository.findAll());
         model.addAttribute("posts", postRepository.findAll());
         return "posts/index";
     }
@@ -49,10 +48,8 @@ public class PostController {
     @GetMapping("/posts/{postId}")
     public String showPost(Model model, @PathVariable Long postId, Long id) {
         Post showPost = postRepository.getById(postId);
-//        User showUser = userRepository.getById(id);
-//        String email = showUser.getEmail();
         model.addAttribute("post", showPost);
-//        model.addAttribute("email", email);
+        model.addAttribute("user", showPost.getUser()); //what is this doing? it's going into the Post class and using the getter that I created after I added the ManytoOne relationship
         return "/posts/show";
     }
 //    @GetMapping("/posts/show")

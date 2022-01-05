@@ -1,6 +1,7 @@
 package com.codeup.springblog;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -17,12 +18,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-//    @OneToOne(cascade = CascadeType.ALL) //CascadeType.ALL means to apply all cascading operations to the related entity. Cascading operations are applied when you delete or update the parent entity.
-//    @JoinColumn(name = "post_id")  //this will create a foreign key named post_id in the user table...I think I should've made a user_id fk...
-//    private Post post;
-
-    @OneToOne(mappedBy = "user")
-    private Post post;
+    @OneToMany(mappedBy = "user") //this is one to many, because one user can have many posts
+    private List<Post> posts;
 
     //default constructor
     public User(){}
@@ -72,11 +69,4 @@ public class User {
         this.password = password;
     }
 
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
 }
