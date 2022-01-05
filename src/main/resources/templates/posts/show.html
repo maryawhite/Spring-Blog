@@ -9,6 +9,7 @@
 <div class="container">
     <h2 th:value="${post.id}" th:text="${post.title}"></h2>
     <p th:text="${post.body}"></p>
+<!--    <p th:text="${email}">created by:</p>-->
 
     <!--the form method is GET, not POST, because I want to send them to the form to edit the post-->
     <form method="GET" th:action="@{'/edit/' + ${postId}}">

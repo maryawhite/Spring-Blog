@@ -13,8 +13,13 @@ public class Post {
     @Column(nullable = false)
     private String body;
 
-    @OneToOne(mappedBy = "post")
+    @OneToOne(cascade = CascadeType.ALL) //CascadeType.ALL means to apply all cascading operations to the related entity. Cascading operations are applied when you delete or update the parent entity.
+    @JoinColumn(name = "user_id")  //this will create a foreign key named user_id in the post table
     private User user;
+
+//    @OneToOne(mappedBy = "post")
+//    private User user;
+
 
     //The inverse-side of the relationship sets the @OneToOne's mappedBy parameter to indicate that the relationship is mapped by the other entity.
     //mappedBy — Defines the entity that owns the relationship which is the post entity in our case? //Usually, the child entity is one that owns the relationship and the parent entity is the inverse side of the relationship.
@@ -59,4 +64,13 @@ public class Post {
     public void setBody(String body) {
         this.body = body;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

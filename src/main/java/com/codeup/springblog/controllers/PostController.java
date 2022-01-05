@@ -2,6 +2,8 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.Post;
 import com.codeup.springblog.PostRepository;
+import com.codeup.springblog.User;
+import com.codeup.springblog.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +14,17 @@ import java.util.Objects;
 public class PostController {
     //dependency injection, create a Repository instance and initialize it in the controller class constructor
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
-    public PostController(PostRepository postRepository) {  //name postRepository i.e. adDao or postDao
+    public PostController(PostRepository postRepository, UserRepository userRepository) {  //name postRepository i.e. adDao or postDao
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
     }
+
 
     @GetMapping("/index")
     public String postsIndex(Model model) {
+        model.addAttribute("user", userRepository.findAll());
         model.addAttribute("posts", postRepository.findAll());
         return "posts/index";
     }
@@ -41,9 +47,12 @@ public class PostController {
 //        return "this will be where you view an individual post by id" + id;
 //    }
     @GetMapping("/posts/{postId}")
-    public String showPost(Model model, @PathVariable Long postId) {
+    public String showPost(Model model, @PathVariable Long postId, Long id) {
         Post showPost = postRepository.getById(postId);
+//        User showUser = userRepository.getById(id);
+//        String email = showUser.getEmail();
         model.addAttribute("post", showPost);
+//        model.addAttribute("email", email);
         return "/posts/show";
     }
 //    @GetMapping("/posts/show")
@@ -56,7 +65,7 @@ public class PostController {
 
     @GetMapping("/posts/create")
     public String viewCreatePost(){
-//        return "This is where you view the form for creating a post";
+        //"This is where you view the form for creating a post";
         return "/posts/create";
     }
 
@@ -68,6 +77,10 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String addNewPost(@ModelAttribute Post post) {  //this is @ModelAttribute, NOT @RequestBody
+        //when creating a post, before saving, assign a user to it.
+        User user = userRepository.getById(1L);
+        //add a setter in Post to set the user...
+        post.setUser(user);
         postRepository.save(post);
         return "redirect:/index";
     }
@@ -83,9 +96,7 @@ public class PostController {
 
     @PostMapping("/edit/{postId}")
     public String editPost(@PathVariable("postId") Long postId, @ModelAttribute Post post) {
-
         postRepository.save(post);
-
         return "redirect:/index";
     }
 
