@@ -21,13 +21,11 @@ public class PostController {
         this.userRepository = userRepository;
     }
 
-
     @GetMapping("/index")
     public String postsIndex(Model model) {
         model.addAttribute("posts", postRepository.findAll());
         return "posts/index";
     }
-
 
 //    @RequestMapping(path = "/posts/index", method = RequestMethod.GET)   //or use @GetMapping("/posts/index")  UPDATED above after adding PostRepository
 //    public String postsIndex(Model model){
@@ -75,7 +73,7 @@ public class PostController {
     @PostMapping("/posts/create")
     public String addNewPost(@ModelAttribute Post post) {  //this is @ModelAttribute, NOT @RequestBody
         //when creating a post, before saving, assign a user to it.
-        User user = userRepository.getById(3L);
+        User user = userRepository.getById(4L);
         //add a setter in Post to set the user...
         post.setUser(user);
         postRepository.save(post);
