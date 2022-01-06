@@ -73,7 +73,7 @@ public class PostController {
     @PostMapping("/posts/create")
     public String addNewPost(@ModelAttribute Post post) {  //this is @ModelAttribute, NOT @RequestBody
         //when creating a post, before saving, assign a user to it.
-        User user = userRepository.getById(2L);
+        User user = userRepository.getById(1L);
         //add a setter in Post to set the user...
         post.setUser(user);
         postRepository.save(post);
@@ -90,10 +90,6 @@ public class PostController {
 
     @PostMapping("/edit/{postId}")
     public String editPost(@PathVariable("postId") Long postId, @ModelAttribute Post post) {
-        //after adding the user relationship, when I edit, it doesn't update the userId. adding these 2 lines temporarily to see if that fixed it
-        User user = userRepository.getById(2L);
-        post.setUser(user);
-        //
         postRepository.save(post);
         return "redirect:/index";
     }
