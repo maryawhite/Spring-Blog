@@ -3,6 +3,8 @@
 <head th:replace="partials ::head(pageTitle='Edit Post')"></head>
 
 <body>
+<div th:insert="partials ::navbar"></div>
+
 <div class="container">
 <h1>Edit post</h1>
 <form th:method="POST" th:object="${posts}" th:value="${postId}" th:action="@{'/edit/' + ${postId}}">

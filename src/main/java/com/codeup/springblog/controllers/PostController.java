@@ -73,7 +73,7 @@ public class PostController {
     @PostMapping("/posts/create")
     public String addNewPost(@ModelAttribute Post post) {  //this is @ModelAttribute, NOT @RequestBody
         //when creating a post, before saving, assign a user to it.
-        User user = userRepository.getById(4L);
+        User user = userRepository.getById(1L);
         //add a setter in Post to set the user...
         post.setUser(user);
         postRepository.save(post);
