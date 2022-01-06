@@ -85,7 +85,6 @@ public class PostController {
     public String viewPost(Model model, @PathVariable Long postId) {
         Post post = postRepository.getById(postId);
         model.addAttribute("posts", post); //this pre-populates the info in the form in the edit.html
-
         return "/posts/edit";
     }
 
