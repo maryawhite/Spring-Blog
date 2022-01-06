@@ -96,8 +96,10 @@ public class PostController {
 
     //delete functionality--add a delete button in the show.html
     @PostMapping("/posts/index")
-    public void deletePost(Long postId) {
+    public String deletePost(Long postId) {
         postRepository.deleteById(postId);
+        return "redirect:/index";
     }
+
 
 }
