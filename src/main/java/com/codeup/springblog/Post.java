@@ -13,7 +13,7 @@ public class Post {
     @Column(nullable = false)
     private String body;
 
-    @ManyToOne(cascade = CascadeType.ALL) //CascadeType.ALL means to apply all cascading operations to the related entity. Cascading operations are applied when you delete or update the parent entity.
+    @ManyToOne
     @JoinColumn(name = "user_id")  //this will create a foreign key named user_id in the post table
     private User user;
 
