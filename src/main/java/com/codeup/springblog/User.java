@@ -19,7 +19,7 @@ public class User {
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user") //this is one to many, because one user can have many posts
-//    (cascade = CascadeType.ALL) //CascadeType.ALL means to apply all cascading operations to the related entity. Cascading operations are applied when you delete or update the parent entity. I think this need to be on User, not on Post
+        //CascadeType.ALL means to apply all cascading operations to the related entity. Cascading operations are applied when you delete or update the parent entity.
     private List<Post> posts;
 
     //default constructor
