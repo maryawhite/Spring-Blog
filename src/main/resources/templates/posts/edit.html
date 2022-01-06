@@ -10,10 +10,10 @@
 <form th:method="POST" th:object="${posts}" th:value="${postId}" th:action="@{'/edit/' + ${postId}}">
     <input type="hidden" th:field="*{id}" name="postId"/> <!--probably don't need this since I'm grabbing the id in the url-->
     <input type="hidden" th:field="*{user}" name="userId"> <!--need to get the userId so it will update in the DB?-->
-    <label for="title">Title:</label><br>
+    <label for="title">New Title:</label><br>
     <input type="text" id="title" name="title" th:field="*{title}" th:value="title" />
     <br />
-    <label for="body">Body</label><br>
+    <label for="body">New Body</label><br>
     <textarea id="body" th:field="*{body}" name="body"></textarea>
     <br />
     <input type="submit" value="Submit Changes">

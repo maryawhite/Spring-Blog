@@ -59,8 +59,8 @@ public class PostController {
 //    }
 
     @GetMapping("/posts/create")
-    public String viewCreatePost(){
-        //"This is where you view the form for creating a post";
+    public String viewCreatePost(Model model){
+        model.addAttribute("post", new Post());  //adding this for form model binding
         return "/posts/create";
     }
 
