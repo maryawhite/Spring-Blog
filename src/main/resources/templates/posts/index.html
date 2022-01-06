@@ -7,6 +7,9 @@
 <div th:insert="partials ::navbar"></div>
 
 <div class="container">
+    <div th:if="${posts.isEmpty()}">
+        <p>There are no posts yet. Write one now.</p>
+    </div>
     <div class="border border-info m-1 p-1" th:each="post : ${posts}">
         <h2 th:text="${post.title}"></h2>
         <p th:text="${post.body}"></p>
