@@ -8,7 +8,7 @@
 
 <div class="container">
     <h1>Create a New Post</h1>
-    <form th:action="@{/posts/create}" method="post" th:object="${post}">
+    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
         <label for="title">Title:</label><br>
         <input type="text" id="title" name="title" th:field="*{title}"/>
         <br/>
