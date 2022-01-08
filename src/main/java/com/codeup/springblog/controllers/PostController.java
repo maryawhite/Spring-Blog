@@ -1,9 +1,6 @@
 package com.codeup.springblog.controllers;
 
-import com.codeup.springblog.Post;
-import com.codeup.springblog.PostRepository;
-import com.codeup.springblog.User;
-import com.codeup.springblog.UserRepository;
+import com.codeup.springblog.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +12,12 @@ public class PostController {
     //dependency injection, create a Repository instance and initialize it in the controller class constructor
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final EmailService emailService;
 
-    public PostController(PostRepository postRepository, UserRepository userRepository) {  //name postRepository i.e. adDao or postDao
+    public PostController(PostRepository postRepository, UserRepository userRepository, EmailService emailService) {  //name postRepository i.e. adDao or postDao
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+        this.emailService = emailService;
     }
 
     @GetMapping("/index")
@@ -76,7 +75,10 @@ public class PostController {
         User user = userRepository.getById(1L);
         //add a setter in Post to set the user...
         post.setUser(user);
+        //Services Exercise
+//        EmailService service = new EmailService(); //it's initialized in the dependency injection?
         postRepository.save(post);
+        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
         return "redirect:/index";
     }
 

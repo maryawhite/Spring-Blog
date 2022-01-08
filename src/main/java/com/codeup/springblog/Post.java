@@ -17,7 +17,7 @@ public class Post {
     @JoinColumn(name = "user_id")  //this will create a foreign key named user_id in the post table...double check-drop tables and re-create, it may make a new Join Table
     private User user;
 
-    //mappedBy — Defines the entity that owns the relationship which is the post entity in our case? //Usually, the child entity is one that owns the relationship and the parent entity is the inverse side of the relationship.
+    //mappedBy — Defines the entity that owns the relationship which is the user entity in our case? //Usually, the child entity is one that owns the relationship and the parent entity is the inverse side of the relationship.
 
     //default constructor
     public Post() {
