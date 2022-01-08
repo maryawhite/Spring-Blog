@@ -78,7 +78,7 @@ public class PostController {
         //Services Exercise
 //        EmailService service = new EmailService(); //it's initialized in the dependency injection?
         postRepository.save(post);
-        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
+        emailService.prepareAndSend(post, post.getTitle(), (post.getTitle().concat(" " + post.getBody())));
         return "redirect:/index";
     }
 
