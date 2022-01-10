@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en-US">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en-US">
 
 <head th:replace="partials ::head(pageTitle='Index')"></head>
 
@@ -14,20 +14,17 @@
         <h2 th:text="${post.title}"></h2>
         <p th:text="${post.body}"></p>
 
-        <a th:href="@{/posts/{postId}(postId=${post.id})}">View post</a>
+<!--        <a th:href="@{/posts/{postId}(postId=${post.id})}">View post</a>-->
 
-        <form class="m-1" th:action="@{'/posts/' + ${post.id}}" method="GET">
+        <form sec:authorize="isAuthenticated()" class="m-1" th:action="@{'/posts/' + ${post.id}}" method="GET">
             <button type="submit" name="editPost" th:value="${post.id}">View Post</button>
         </form>
 
-        <form class="m-1" th:action="@{/posts/index}" method="post">
+        <form class="m-1" sec:authorize="isAuthenticated()" th:action="@{/posts/index}" method="post">
             <button type="submit" name="postId" th:value="${post.id}">Delete Post</button>
             <!--You must use th:value, not just value= -->
         </form>
     </div>
 </div>
-
-<!--<p th:text="${posts}"></p>-->
-
 </body>
 </html>

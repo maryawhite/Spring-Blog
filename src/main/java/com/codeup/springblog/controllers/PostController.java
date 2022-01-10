@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -71,11 +72,8 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String addNewPost(@ModelAttribute Post post) {  //this is @ModelAttribute, NOT @RequestBody
-        //when creating a post, before saving, assign a user to it.
-        User user = userRepository.getById(1L);
-        //add a setter in Post to set the user...
-        post.setUser(user);
-        //Services Exercise
+       User postCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(postCreator);
         postRepository.save(post);
         emailService.prepareAndSend(post, "Your post has been created", (post.getTitle().concat(" " + post.getBody())));
         return "redirect:/index";
@@ -83,24 +81,25 @@ public class PostController {
 
     //edit functionality
     @GetMapping("/edit/{postId}")
-    public String viewPost(Model model, @PathVariable Long postId) {
+    public String viewPost(Model model, @PathVariable long postId) {
         Post post = postRepository.getById(postId);
         model.addAttribute("posts", post); //this pre-populates the info in the form in the edit.html
         return "/posts/edit";
     }
 
     @PostMapping("/edit/{postId}")
-    public String editPost(@PathVariable("postId") Long postId, @ModelAttribute Post post) {
+    public String editPost(@PathVariable("postId") long postId, @ModelAttribute Post post) {
+        //get the userId, then use getOne method
+        User creator = userRepository.getById(userId);
         postRepository.save(post);
         return "redirect:/index";
     }
 
     //delete functionality--add a delete button in the show.html
     @PostMapping("/posts/index")
-    public String deletePost(Long postId) {
+    public String deletePost(long postId) {
         postRepository.deleteById(postId);
         return "redirect:/index";
     }
-
 
 }
