@@ -76,9 +76,8 @@ public class PostController {
         //add a setter in Post to set the user...
         post.setUser(user);
         //Services Exercise
-//        EmailService service = new EmailService(); //it's initialized in the dependency injection?
         postRepository.save(post);
-        emailService.prepareAndSend(post, post.getTitle(), (post.getTitle().concat(" " + post.getBody())));
+        emailService.prepareAndSend(post, "Your post has been created", (post.getTitle().concat(" " + post.getBody())));
         return "redirect:/index";
     }
 

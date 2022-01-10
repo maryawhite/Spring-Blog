@@ -38,6 +38,15 @@ public class User {
         this.password = password;
     }
 
+    //constructor for security authentication
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+    }
+    //Make sure your email and username columns have a unique constraint.
+
     public long getId() {
         return id;
     }
