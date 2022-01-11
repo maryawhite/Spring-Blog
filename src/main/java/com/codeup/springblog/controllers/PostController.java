@@ -24,6 +24,8 @@ public class PostController {
     @GetMapping("/index")
     public String postsIndex(Model model) {
         model.addAttribute("posts", postRepository.findAll());
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(currentUser);
         return "posts/index";
     }
 
@@ -101,6 +103,12 @@ public class PostController {
     public String deletePost(long postId) {
         postRepository.deleteById(postId);
         return "redirect:/index";
+    }
+
+    @GetMapping("/profile")
+    public String viewProfilePage(long userId) {
+        userRepository.getById(userId);
+        return "/profile";
     }
 
 }
