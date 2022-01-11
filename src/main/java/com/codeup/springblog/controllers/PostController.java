@@ -81,16 +81,17 @@ public class PostController {
 
     //edit functionality
     @GetMapping("/edit/{postId}")
-    public String viewPost(Model model, @PathVariable long postId) {
+    public String editPostForm(Model model, @PathVariable long postId) {
         Post post = postRepository.getById(postId);
+        User creator = post.getUser();
+        System.out.println(creator.getId());
         model.addAttribute("posts", post); //this pre-populates the info in the form in the edit.html
         return "/posts/edit";
     }
 
     @PostMapping("/edit/{postId}")
     public String editPost(@PathVariable("postId") long postId, @ModelAttribute Post post) {
-        //get the userId, then use getOne method
-        User creator = userRepository.getById(userId);
+
         postRepository.save(post);
         return "redirect:/index";
     }
