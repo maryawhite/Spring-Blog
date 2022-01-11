@@ -24,8 +24,6 @@ public class PostController {
     @GetMapping("/index")
     public String postsIndex(Model model) {
         model.addAttribute("posts", postRepository.findAll());
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(currentUser);
         return "posts/index";
     }
 
@@ -46,7 +44,7 @@ public class PostController {
 //        return "this will be where you view an individual post by id" + id;
 //    }
     @GetMapping("/posts/{postId}")
-    public String showPost(Model model, @PathVariable Long postId, Long id) {
+    public String showPost(Model model, @PathVariable long postId, long id) {
         Post showPost = postRepository.getById(postId);
         model.addAttribute("post", showPost);
         model.addAttribute("user", showPost.getUser()); //what is this doing? it's going into the Post class and using the getter that I created after I added the ManytoOne relationship
@@ -79,6 +77,7 @@ public class PostController {
         postRepository.save(post);
         emailService.prepareAndSend(post, "Your post has been created", (post.getTitle().concat(" " + post.getBody())));
         return "redirect:/index";
+        //how would I get it to show the post that was just created, instead of redirecting to the index?
     }
 
     //edit functionality
@@ -106,8 +105,11 @@ public class PostController {
     }
 
     @GetMapping("/profile")
-    public String viewProfilePage(long userId) {
-        userRepository.getById(userId);
+    public String viewProfilePage(User userId, Model model) {
+        User creator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        userId = userRepository.getById(creator.getId());
+        model.addAttribute("username", creator.getUsername());
         return "/profile";
     }
 
