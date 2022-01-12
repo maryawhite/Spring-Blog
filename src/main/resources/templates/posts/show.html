@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en-US">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en-US">
 
 <head th:replace="partials ::head(pageTitle='Show one post')"></head>
 
@@ -14,10 +14,12 @@
     <p th:text="|Created By Email: ${user.email}|"></p> <!--literal substitution using |-->
 
     <!--the form method is GET, not POST, because I want to send them to the form to edit the post-->
-    <form method="GET" th:action="@{'/edit/' + ${postId}}">
-        <input type="hidden" name="postId" id="postId" th:field="*{post.id}" />
-        <button type="submit" name="submit" value="editPost">Edit</button>
-    </form>
+    <div sec:authorize="isAuthenticated()">
+        <form method="GET" th:action="@{'/edit/' + ${postId}}">
+            <input type="hidden" name="postId" id="postId" th:field="*{post.id}"/>
+            <button type="submit" name="submit" value="editPost">Edit</button>
+        </form>
+    </div>
 
 </div>
 </body>

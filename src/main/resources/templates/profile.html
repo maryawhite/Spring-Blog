@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title>profile</title>
-</head>
+<head th:replace="partials ::head(pageTitle='Index')"></head>
 <body>
+<div th:insert="partials ::navbar"></div>
+
 <h1>Hello, <span th:text="${username}">World</span>!</h1>
+
+<!--<div class="border border-info m-1 p-1" th:each="post : ${myPosts}">-->
+<!--    <h2 th:text="${post.title}"></h2>-->
+<!--    <p th:text="${post.body}"></p>-->
+<!--</div>-->
 
 </body>
 </html>

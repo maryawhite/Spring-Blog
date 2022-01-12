@@ -44,10 +44,10 @@ public class PostController {
 //        return "this will be where you view an individual post by id" + id;
 //    }
     @GetMapping("/posts/{postId}")
-    public String showPost(Model model, @PathVariable long postId, long id) {
+    public String showPost(Model model, @PathVariable Long postId, Long id) {
         Post showPost = postRepository.getById(postId);
         model.addAttribute("post", showPost);
-        model.addAttribute("user", showPost.getUser()); //what is this doing? it's going into the Post class and using the getter that I created after I added the ManytoOne relationship
+        model.addAttribute("user", showPost.getUser()); //going into the Post class and using the getter that I created after I added the ManytoOne relationship. and using it to show who it was created by
         return "/posts/show";
     }
 //    @GetMapping("/posts/show")
@@ -82,35 +82,31 @@ public class PostController {
 
     //edit functionality
     @GetMapping("/edit/{postId}")
-    public String editPostForm(Model model, @PathVariable long postId) {
+    public String editPostForm(Model model, @PathVariable Long postId) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("userId", loggedInUser);
+        System.out.println("logged in user" + loggedInUser.getId());
+//        User userId = userRepository.getById(loggedInUser.getId());
+//        model.addAttribute("userId", userId);
+//        System.out.println(userId);
         Post post = postRepository.getById(postId);
         User creator = post.getUser();
-        System.out.println(creator.getId());
+        System.out.println("creator get id" + creator.getId());
         model.addAttribute("posts", post); //this pre-populates the info in the form in the edit.html
         return "/posts/edit";
     }
 
     @PostMapping("/edit/{postId}")
-    public String editPost(@PathVariable("postId") long postId, @ModelAttribute Post post) {
-
+    public String editPost(@PathVariable("postId") Long postId, @ModelAttribute Post post) {
         postRepository.save(post);
         return "redirect:/index";
     }
 
     //delete functionality--add a delete button in the show.html
     @PostMapping("/posts/index")
-    public String deletePost(long postId) {
+    public String deletePost(Long postId) {
         postRepository.deleteById(postId);
         return "redirect:/index";
-    }
-
-    @GetMapping("/profile")
-    public String viewProfilePage(User userId, Model model) {
-        User creator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        userId = userRepository.getById(creator.getId());
-        model.addAttribute("username", creator.getUsername());
-        return "/profile";
     }
 
 }
